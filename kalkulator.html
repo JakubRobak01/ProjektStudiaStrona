@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Jakub Robak - CDV</title>
+    <!-- Dodaj Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Dodaj niestandardowy CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Nawigacja -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Jakub Robak - Collegium Da Vinci</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="strona.html">Strona główna</a> 
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="omnie.html">O mnie</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="kalkulator.html">Cennik</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="projekty.html">Projekty graficzne</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="kontakt.html">Kontakt</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="contact" class="container mt-5">
+        <h2>Cennik usług</h2>
+        <p><br>Witam Cię w moim cenniku usług które oferuję, zapraszam do zapoznania się z nim poniżej.<br><br>
+               Możesz również spradzić jaki będzie sumaryczny koszt intersujących Cię usług klikająć "<b>Oblicz</b>" po wcześniejszym wypełnienu niezbędnych pól.
+        </p>
+        
+    </section>
+    
+   
+    <body>
+
+    <div class="container mt-5">
+        <form id="serviceForm">
+            <div class="form-group">
+                <label for="hours1"><b>Konsultacje weryfikujące wiedzę</b></label>
+                <input type="number" step="0.5" min="0" class="form-control" id="hours1" placeholder="Wpisz potrzebną liczbę godzin">
+                <input type="number" step="0.01" min="0" class="form-control" id="rate1" placeholder="Stawka godzinowa w PLN 40.00" readonly >
+            </div>
+
+            <div class="form-group">
+                <label for="hours1"><b>Konsultacje weyrfikujące projekt</b></label>
+                <input type="number" step="0.5" min="0" class="form-control" id="hours2" placeholder="Wpisz potrzebną liczbę godzin">
+                <input type="number" step="0.01" min="0" class="form-control" id="rate2" placeholder="Stawka godzinowa w PLN 60.00" readonly >
+            </div>
+
+            <div class="form-group">
+                <label for="hours3"><b>Pisanie strony - HTML</b></label>
+                <input type="number" step="0.5" min="0" class="form-control" id="hours3" placeholder="Wpisz potrzebną liczbę godzin">
+                <input type="number" step="0.01" min="0" class="form-control" id="rate3" placeholder="Stawka godzinowa w PLN 70.00" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="hours4"><b>Pisanie strony - CSS</b></label>
+                <input type="number" step="0.5" min="0" class="form-control" id="hours4" placeholder="Wpisz potrzebną liczbę godzin">
+                <input type="number" step="0.01" min="0" class="form-control" id="rate4" placeholder="Stawka godzinowa w PLN 50.00" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="hours5"><b>Pisanie strony - JavaScript</b></label>
+                <input type="number" step="0.5" min="0" class="form-control" id="hours5" placeholder="Wpisz potrzebną liczbę godzin">
+                <input type="number" step="0.01" min="0" class="form-control" id="rate5" placeholder="Stawka godzinowa w PLN 120.00" readonly>
+            </div>
+
+            <!-- Dodaj dowolną ilość kolejnych pól wprowadzania -->
+
+            <button type="button" class="btn btn-primary" onclick="calculateTotalSalary()">Oblicz Sumę</button>
+        </form>
+
+        <div class="mt-3">
+            <h6><b>Suma kosztów za wybrane usługi</b></h6>
+            <p id="totalSalary">0.00 PLN</p>
+        </div>
+    </div>
+
+
+    <script>
+        // Stałe stawki godzinowe wprowadzone przez administratora
+        var hourlyRate1 = 40.00;
+        var hourlyRate2 = 60.00;
+        var hourlyRate3 = 70.00;
+        var hourlyRate4 = 50.00;
+        var hourlyRate5 = 120.00;
+
+        function calculateTotalSalary() {
+            var totalCost = 0;
+
+            // Iteruj przez wszystkie pola liczby godzin i oblicz sumę
+            for (var i = 1; i <= 5; i++) {
+                var enteredHours = parseFloat(document.getElementById("hours" + i).value);
+                var hourlyRate = eval("hourlyRate" + i); // Wybierz odpowiednią stawkę godzinową
+                totalCost += isNaN(enteredHours) ? 0 : (enteredHours * hourlyRate);
+            }
+
+            // Wyświetl wynik
+            document.getElementById("totalSalary").innerText = totalCost.toFixed(2) + " PLN";
+        }
+    </script>
+
+</body>
+
+</html>

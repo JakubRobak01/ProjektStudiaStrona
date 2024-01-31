@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Jakub Robak - CDV</title>
+    <!-- Dodaj Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Dodaj niestandardowy CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Nawigacja -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Jakub Robak - Collegium Da Vinci</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="strona.html">Strona główna</a> 
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="omnie.html">O mnie</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="kalkulator.html">Cennik</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="projekty.html">Projekty graficzne</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="kontakt.html">Kontakt</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+      <!-- Sekcja kontakt -->
+      <section id="contact" class="container mt-5">
+        <h2>Kontakt</h2>
+ 
+        <p><br>Masz jakieś zapytania?<br>
+               <br>Chyba tak jeśli tu wylądowałeś, pisz śmiało a ja postaram się Ci pomóc i odpowiedzieć jak najszybciej.<br>
+                <br>Wypełnij tylko poniższy <b>Formularz Kontaktowy</b> aby wysłać do mnie wiadomość.
+        </p>
+
+      </section>
+      <body>
+
+        <div class="container mt-5">
+            <h2>Formularz Kontaktowy</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="email">Adres email:</label>
+                    <input type="email" class="form-control" id="email" placeholder="Wpisz swój adres email (Wymagane)" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Numer telefonu:</label>
+                    <input type="tel" class="form-control" id="phone" placeholder="Wpisz swój numer telefonu (Opcjonalne)" oninput="validatePhoneNumber(this)">
+                </div>
+                <div class="form-group">
+                    <label for="firstName">Imię:</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="Wpisz swoje imię (Wymagane)" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Nazwisko:</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="Wpisz swoje nazwisko (Wymagane)" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Treść zapytania:</label>
+                    <textarea class="form-control" id="message" rows="5" placeholder="Wpisz treść swojego zapytania (Wymagane)" required></textarea>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="validateAndSubmit()">Wyślij</button>
+            </form>
+        </div>
+    
+        <!-- Modal -->
+        <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmationModalLabel">Potwierdzenie</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Twój formularz został wysłany.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Dodaj Bootstrap JS, jQuery i Popper.js -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+        <script>
+
+        function validatePhoneNumber(input) {
+        // Usuń znaki, które nie są cyframi
+        input.value = input.value.replace(/\D/g, '');
+    }
+            function validateAndSubmit() {
+                var email = document.getElementById("email").value;
+                var phone = document.getElementById("phone").value;
+                var firstName = document.getElementById("firstName").value;
+                var lastName = document.getElementById("lastName").value;
+                var message = document.getElementById("message").value;
+    
+                // Sprawdź, czy email zawiera "@"
+                if (!isValidEmail(email)) {
+                    alert("Podany adres email jest nieprawidłowy.");
+                    return;
+                }
+    
+                if (email && firstName && lastName && message) {
+                    // Wszystkie wymagane pola są wypełnione, możemy wysłać formularz
+                    $('#confirmationModal').modal('show');
+                } else {
+                    // Jeśli jakiekolwiek wymagane pole jest puste, wyświetl alert
+                    alert("Uzupełnij poprawnie formularz przed wysłaniem.");
+                }
+            }
+    
+            function isValidEmail(email) {
+                // Prosta walidacja adresu email przy użyciu wyrażenia regularnego
+                var emailRegex = /\S+@\S+\.\S+/;
+                return emailRegex.test(email);
+            }
+        </script>
